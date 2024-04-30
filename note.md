@@ -113,6 +113,7 @@ major engineering difficulties
 - xingqiu ult on-normal-start listener
 - aura and internal cooldown
 - energy
+- stamina
 
 1. Game engine stores 2 things of importance: a user input queue and an Event priority queue; also tracks whether or not the user can currently act
 2. if can act, consumes the next user input item
@@ -123,3 +124,23 @@ major engineering difficulties
 
 
 
+actually while the inputs are being added, you should run the game state until a new input is queueable
+then there should be like a `gameengine.flush` method that clears out the rest of the state
+
+The game engine loop should have logic as follows:
+- there should only ever be at most one input action queued
+- if you don't have one queued and there is an action available to be take now, queue the next action
+- if there is an action queued, play forward until that action has been consumed AND a new action can be taken.
+
+actually, the user calls THEMSELVES should be the ones driving the game engine forward. 
+
+dynamic buff is not so easy
+
+warning note about buffs; make sure you make a copy for each character, bc the buff contains a character attribute; or actually, should dynamic buffs be passed a character attribute when you call get stat? no I don't think that makes sense for personal buffs. 
+
+maybe would've been smarter to have a na_count reset event
+this event would need to get fast forwarded on a dash though... ugh
+
+
+remaining to do
+- 
