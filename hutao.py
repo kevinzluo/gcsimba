@@ -1,5 +1,5 @@
 from entities import StatContainer, Character, Weapon
-from buffs import SanguineRouge, RecklessCinnabar
+from buffs import SanguineRouge, RecklessCinnabar, ParamitaPapilio
 from attack import AttackObject, DoNormalAttack, HuTaoSkill
 
 
@@ -15,9 +15,14 @@ class HuTao(Character):
             buffs + [SanguineRouge()]
         )
 
-        self.pp_active = False
+        # self.pp_active = False
         self.skill_cooldown = 18 * 60
 
+    def pp_active(self):
+        for buff in self.buffs:
+            if isinstance(buff, ParamitaPapilio):
+                return True
+        return False
 
     def normal(self):
         # assume talent level 10
@@ -61,7 +66,7 @@ class HuTao(Character):
                 [m * self.get_atk() / 100 for m in mvs[self.na_count]],
                 frames[self.na_count],
                 "na_damage",
-                "pyro" if self.pp_active else "phys",
+                "pyro" if self.pp_active() else "phys",
                 "na_damage"
             )
         )
@@ -94,7 +99,6 @@ class HuTao(Character):
         # what to do about a buff that gives you pyro infusion????
 
 
-        self.pp_active = True
 
         # buff = ParamitaPapilio(self.game_engine.current_time)
 

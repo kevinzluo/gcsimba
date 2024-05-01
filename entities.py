@@ -161,7 +161,7 @@ class Weapon:
 class Enemy(Entity):
 
     def __init__(self):
-        super().__init__()
+        super().__init__(level = 100)
         self.damage_taken = 0
         self.damage_engine = DamageEngine(self)
         self.res = {

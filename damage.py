@@ -70,8 +70,9 @@ class DamageEngine:
             crit_mult += damage_object.damage_owner.get_total_stat("cd") / 100
 
         # print(damage_object.multiplied_stat)
+        def_mult = (damage_object.damage_owner.level + 100) / (damage_object.damage_owner.level + 100 + damage_object.damage_target.level + 100) # no def reduction
 
-        damage_total = dmg_bonus_mult * res_mult * crit_mult * damage_object.multiplied_stat
+        damage_total = dmg_bonus_mult * res_mult * crit_mult * damage_object.multiplied_stat * def_mult
         print(f"Dealt {damage_total}, crit = {did_crit}")
 
         return damage_total, did_crit

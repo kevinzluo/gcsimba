@@ -149,7 +149,6 @@ class HuTaoSkillStart(Event):
 
     def modify_state(self):
         assert self.time == self.game_state.current_time
-        self.hutao_obj.pp_active = True
 
         self.game_state.in_action = True
         self.game_state.is_dash_cancelable = False

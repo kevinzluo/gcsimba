@@ -1,5 +1,6 @@
 from metaevents import DamageDealt, DidCrit, DamageReceived
 
+# the workhorse class
 class Event:
     def __init__(self, pre_metaevents, post_metaevents, time, game_state, is_user_action = False, is_dash = False, is_delay = False):
         self.pre_metaevents = pre_metaevents

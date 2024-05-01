@@ -15,8 +15,9 @@ ht_artifact_stats = StatContainer(
     em=107,
     flat_atk=33 + 311,
     flat_hp=269 + 4780,
-    pyro_bonus=15 + 46.6,
+    pyro_bonus=15 + 46.6 + 7.5, # add in 1 stack cw oops
 )
+
 ht = HuTao(level = 90, artifact_stats=ht_artifact_stats, buffs = [HydroResonance()])
 print(ht.buffs)
 
@@ -35,6 +36,9 @@ test_dummy = TestDummy()
 ge.load_enemy(test_dummy)
 
 ht.skill()
+
+print("HT attack after E", ht.get_atk())
+
 ht.normal()
 ht.normal()
 ht.normal()
@@ -59,6 +63,11 @@ ht.normal()
 ht.normal()
 ht.normal()
 ht.normal()
+print("------------------ start here")
+
+print(ht.get_atk())
+
+print(ht.buffs)
 ht.normal()
 
 ge.flush()

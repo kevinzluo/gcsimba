@@ -6,11 +6,13 @@ class MetaEventHandler():
         self.callback_fns = [] # trigger_event, callback_fn pairs
         self.parent = parent
 
+    # attach a callback for given triggers
     def attach_callback(self, trigger_meta_events, callback_fn):
         self.callback_fns.append(
             (trigger_meta_events, callback_fn)
         )
     
+    # processes a metaevent that has propagated up
     def process_metaevent(self, metaevent):
         print(f"Metaevent Handler of {self.owner_object} received event {metaevent}")
 
@@ -18,6 +20,8 @@ class MetaEventHandler():
             for trigger in triggers:
                 if isinstance(metaevent, trigger):
                     callback(metaevent)
+
+        # propagate forward to parent
         if self.parent is not None:
             self.parent.process_metaevent(metaevent)
 
